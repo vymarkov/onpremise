@@ -58,6 +58,13 @@ import six
 
 CONF_ROOT = os.path.dirname(__file__)
 
+if env('OIDC_CLIENT_ID') and env('OIDC_CLIENT_SECRET') and env('OIDC_DOMAIN'):
+    OIDC_CLIENT_ID = env('OIDC_CLIENT_ID')
+    OIDC_CLIENT_SECRET = env('OIDC_CLIENT_SECRET')
+    OIDC_DOMAIN = env('OIDC_DOMAIN')
+    OIDC_SCOPE = env('OIDC_SCOPE') or 'openid email profile'
+    OIDC_ISSUER = env('OIDC_ISSUER') or 'OpenID Connect Provider'
+
 postgres = env('SENTRY_POSTGRES_HOST') or (env('POSTGRES_PORT_5432_TCP_ADDR') and 'postgres')
 if postgres:
     DATABASES = {
